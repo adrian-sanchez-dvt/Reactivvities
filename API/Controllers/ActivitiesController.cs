@@ -18,7 +18,7 @@ public class ActivitiesController() : BaseApiController
     //     this.context = context;
     // }
 
-    [AllowAnonymous]
+    // [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<Activity>>> GetActivities()
     {

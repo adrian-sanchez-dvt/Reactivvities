@@ -3,9 +3,11 @@ import { ActivityCard } from "./ActivityCard";
 import { useActivities } from "../../../lib/hooks/useActivities";
 
 export const ActivityList = () => {
-  const { activities, isPending } = useActivities();
+  const { activities, isLoading } = useActivities();
 
-  if (!activities || isPending) return <Typography>Loanding ...</Typography>;
+  if (isLoading) return <Typography>Loanding ...</Typography>;
+
+  if (!activities) return <Typography>No activities found</Typography>;
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
       {activities.map((activity) => (

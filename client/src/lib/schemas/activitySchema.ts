@@ -1,6 +1,5 @@
 import {z} from 'zod';
-
-const requiredString = (filedName:string) => z.string({error:`${filedName} is rquired`}).nonempty(`${filedName} is rquired`).min(1, {message: `${filedName} is rquired`});
+import { requiredString } from '../util/util';
 
 export const activitySchema = z.object({
     title: requiredString('Title'),
