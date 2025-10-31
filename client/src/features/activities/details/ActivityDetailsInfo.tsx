@@ -1,7 +1,7 @@
 import { CalendarToday, Info, Place } from "@mui/icons-material";
 import { Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import { formatDate } from "../../../lib/util/util";
-import type { Activity } from "../../../lib/types";
+
 import { useState } from "react";
 import { MapComponent } from "../../../app/shared/components/MapComponent";
 
@@ -70,7 +70,10 @@ export const ActivityDetailsInfo = ({ activity }: Props) => {
           <Typography>
             {activity.venue}, {activity.city}
           </Typography>
-          <Button onClick={() => setMapOpen(!mapOpen)}>
+          <Button
+            sx={{ whiteSpace: "nowrap", mx: 2 }}
+            onClick={() => setMapOpen(!mapOpen)}
+          >
             {mapOpen ? "Hide map" : "Show map"}
           </Button>
         </Grid>

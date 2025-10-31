@@ -10,9 +10,13 @@ import {
   Grid,
 } from "@mui/material";
 
-export const ActivityDetailsSidebar = () => {
+type Props = {
+  activity: Activity;
+};
+
+export const ActivityDetailsSidebar = ({ activity }: Props) => {
   const following = true;
-  const isHost = true;
+
   return (
     <>
       <Paper
@@ -24,55 +28,62 @@ export const ActivityDetailsSidebar = () => {
           p: 2,
         }}
       >
-        <Typography variant="h6">2 people going</Typography>
+        <Typography variant="h6">
+          {activity.attendees.length} people going
+        </Typography>
       </Paper>
       <Paper sx={{ padding: 2 }}>
-        <Grid
-          container
-          alignItems="center"
-        >
-          <Grid size={8}>
-            <List sx={{ display: "flex", flexDirection: "column" }}>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar
-                    alt={"attendee name"}
-                    src={"/assets/user.png"}
-                  />
-                </ListItemAvatar>
-                <ListItemText>
-                  <Typography variant="h6">Bob</Typography>
-                </ListItemText>
-              </ListItem>
-            </List>
-          </Grid>
+        {activity.attendees.map((att) => (
           <Grid
-            size={4}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              gap: 1,
-            }}
+            key={att.id}
+            container
+            alignItems="center"
           >
-            {isHost && (
-              <Chip
-                label="Host"
-                color="warning"
-                variant="filled"
-                sx={{ borderRadius: 2 }}
-              />
-            )}
-            {following && (
-              <Typography
-                variant="body2"
-                color="orange"
-              >
-                Following
-              </Typography>
-            )}
+            <Grid size={8}>
+              <List sx={{ display: "flex", flexDirection: "column" }}>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar
+                      variant="rounded"
+                      alt={att.displayName + " image"}
+                      src={att.imageUrl}
+                      sx={{ width: 75, height: 75, mr: 3 }}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText>
+                    <Typography variant="h6">{att.displayName}</Typography>
+                    {following && (
+                      <Typography
+                        variant="body2"
+                        color="orange"
+                      >
+                        Following
+                      </Typography>
+                    )}
+                  </ListItemText>
+                </ListItem>
+              </List>
+            </Grid>
+            <Grid
+              size={4}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: 1,
+              }}
+            >
+              {activity.hostId === att.id && (
+                <Chip
+                  label="Host"
+                  color="warning"
+                  variant="filled"
+                  sx={{ borderRadius: 2 }}
+                />
+              )}
+            </Grid>
           </Grid>
-        </Grid>
+        ))}
       </Paper>
     </>
   );
