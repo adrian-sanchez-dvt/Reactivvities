@@ -37,7 +37,13 @@ export const ActivityCard = ({ activity }: Props) => {
         justifyContent="space-between"
       >
         <CardHeader
-          avatar={<Avatar sx={{ height: 80, width: 80 }} />}
+          avatar={
+            <Avatar
+              src={activity.hostImageUrl}
+              sx={{ height: 80, width: 80 }}
+              alt="image of host"
+            />
+          }
           title={activity.title}
           titleTypographyProps={{
             fontWeight: "bold",
