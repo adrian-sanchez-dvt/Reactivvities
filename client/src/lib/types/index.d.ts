@@ -24,6 +24,11 @@ type Profile = {
     imageUrl:   string;
 }
 
+type EditProfile = {
+    displayName: string;
+    bio?:        string;
+}
+
 type Photo = {
     id:        string;
     url:       string;

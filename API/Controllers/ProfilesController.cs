@@ -1,6 +1,8 @@
 using System;
 using Application.Profiles.Commands;
+using Application.Profiles.DTOs;
 using Application.Profiles.Queries;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -35,5 +37,11 @@ public class ProfilesController : BaseApiController
     public async Task<ActionResult> GetProfile(string userId)
     {
         return HandleResult(await Mediator.Send(new GetProfile.Query { UserId = userId }));
+    }
+
+    [HttpPut()]
+    public async Task<ActionResult> UpdateProfile(EditProfileDto profile)
+    {
+        return HandleResult(await Mediator.Send(new EditProfile.Command { Profile = profile }));
     }
 }

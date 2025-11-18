@@ -78,6 +78,24 @@ export const useProfile = (id:string) => {
                 }
             });
         }
+    });
+
+    const updateProfile = useMutation({
+        mutationFn: async (editProfile:EditProfile) => {
+            await agent.put('/profiles', editProfile)
+        },
+        onSuccess: async (_, editProfile) => {
+            await queryClient.setQueryData(['user'], (userData: User) => {
+                if (!userData) return userData;
+                return {
+                    ...userData,
+                    displayName: editProfile.displayName
+                }
+            });
+            await queryClient.invalidateQueries({
+                queryKey: ['profile', id]
+            });
+        }
     })
 
     const deletePhoto = useMutation({
@@ -89,7 +107,7 @@ export const useProfile = (id:string) => {
                 return photos.filter(x => x.id !== photoId )
             });
         }
-    })
+    });
     
     const isCurrentUser = useMemo(()=> {
         return id === queryClient.getQueryData<User>(['user'])?.id
@@ -104,5 +122,6 @@ export const useProfile = (id:string) => {
         uploadPhoto,
         setMainPhoto,
         deletePhoto,
+        updateProfile,
     }
 }

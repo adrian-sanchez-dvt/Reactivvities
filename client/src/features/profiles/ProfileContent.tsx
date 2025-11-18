@@ -31,7 +31,7 @@ export const ProfileContent = () => {
         orientation="vertical"
         value={value}
         onChange={handleChange}
-        sx={{ borderRight: 1, height: 450, maxWidth: 200 }}
+        sx={{ borderRight: 1, height: 450, maxWidth: 200, overflow: "visible" }}
       >
         {tabContent.map((tab, index) => (
           <Tab
