@@ -15,8 +15,6 @@ type Props = {
 };
 
 export const ActivityDetailsSidebar = ({ activity }: Props) => {
-  const following = true;
-
   return (
     <>
       <Paper
@@ -52,7 +50,7 @@ export const ActivityDetailsSidebar = ({ activity }: Props) => {
                   </ListItemAvatar>
                   <ListItemText>
                     <Typography variant="h6">{att.displayName}</Typography>
-                    {following && (
+                    {att.following && (
                       <Typography
                         variant="body2"
                         color="orange"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Paper, Tab, Tabs } from "@mui/material";
 import { ProfilesPhotos } from "./ProfilesPhotos";
 import { ProfileAbout } from "./ProfileAbout";
+import { ProfileFollowings } from "./ProfileFollowings";
 
 export const ProfileContent = () => {
   const [value, setValue] = useState(0);
@@ -14,8 +15,8 @@ export const ProfileContent = () => {
     { label: "About", content: <ProfileAbout /> },
     { label: "Photos", content: <ProfilesPhotos /> },
     { label: "Events", content: <div>Events</div> },
-    { label: "Followers", content: <div>Followers</div> },
-    { label: "Following", content: <div>Following</div> },
+    { label: "Followers", content: <ProfileFollowings activeTab={value} /> },
+    { label: "Following", content: <ProfileFollowings activeTab={value} /> },
   ];
 
   return (
@@ -24,7 +25,7 @@ export const ProfileContent = () => {
       mt={2}
       p={3}
       elevation={3}
-      height={500}
+      height={600}
       sx={{ display: "flex", alignItems: "flex-start", borderRadius: 3 }}
     >
       <Tabs
