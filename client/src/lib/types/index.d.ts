@@ -1,3 +1,8 @@
+type PagedList<T, TCrusor> = {
+    items: T[],
+    nextCursor: TCrusor
+}
+
 type  Activity = {
     id:              string;
     title:           string;
@@ -25,6 +30,13 @@ type Profile = {
     followersCount?: number;
     followingCount?: number;
     following?: boolean;
+}
+
+type ProfileActivities = {
+    id: string;
+    title:string;
+    category:string;
+    date:string;
 }
 
 type EditProfile = {

@@ -9,8 +9,13 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import { useStore } from "../../../lib/hooks/useStore";
+import { observer } from "mobx-react-lite";
 
-export const ActivityFilters = () => {
+const ActivityFilters = observer(function ActivityFilters() {
+  const {
+    activityStore: { setFilter, setStarDate, filter, startDate },
+  } = useStore();
   return (
     <Box
       sx={{ display: "flex", flexDirection: "column", gap: 3, borderRadius: 3 }}
@@ -30,13 +35,22 @@ export const ActivityFilters = () => {
             Filters
           </Typography>
           <MenuList>
-            <MenuItem>
+            <MenuItem
+              selected={filter === "all"}
+              onClick={() => setFilter("all")}
+            >
               <ListItemText primary="All events" />
             </MenuItem>
-            <MenuItem>
+            <MenuItem
+              selected={filter === "isGoing"}
+              onClick={() => setFilter("isGoing")}
+            >
               <ListItemText primary="I'm going" />
             </MenuItem>
-            <MenuItem>
+            <MenuItem
+              selected={filter === "isHost"}
+              onClick={() => setFilter("isHost")}
+            >
               <ListItemText primary="I'm hosting" />
             </MenuItem>
           </MenuList>
@@ -58,8 +72,13 @@ export const ActivityFilters = () => {
           <Event sx={{ mr: 1 }} />
           Select date
         </Typography>
-        <Calendar />
+        <Calendar
+          value={startDate}
+          onChange={(date) => setStarDate(date as Date)}
+        />
       </Box>
     </Box>
   );
-};
+});
+
+export default ActivityFilters;

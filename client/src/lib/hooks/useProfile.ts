@@ -12,6 +12,17 @@ export const useProfile = (id:string, predicate?: string) => {
             return response.data;
         },
         enabled: !!id && !predicate
+    });
+    
+    const {data:profileActivities, isLoading:loadingProfileActivities} = useQuery<ProfileActivities[]>({
+        queryKey: ['profile', id, 'activities', predicate],
+        queryFn: async () => {
+            const response = await agent.get<ProfileActivities[]>(`/profiles/${id}/activities`,{
+                params:{filter:predicate}
+            });
+            return response.data;
+        },
+        enabled: !!id && !!predicate
     })
 
     const uploadPhoto = useMutation({
@@ -155,5 +166,7 @@ export const useProfile = (id:string, predicate?: string) => {
         updateFollowing,
         followings,
         loadingFollowings,
+        profileActivities,
+        loadingProfileActivities,
     }
 }
